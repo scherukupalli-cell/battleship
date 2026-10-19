@@ -80,5 +80,33 @@ def api_random_fleet():
     return jsonify(ships=random_fleet())
 
 
+# ---------- Error handling: never show a traceback ----------
+
+def error_response(message, status):
+    if request.path.startswith("/api/"):
+        return jsonify(error=message), status
+    return render_template("error.html", message=message, status=status), status
+
+
+@app.errorhandler(GameError)
+def handle_game_error(e):
+    return error_response(e.message, e.status)
+
+
+@app.errorhandler(HTTPException)
+def handle_http_error(e):
+    messages = {
+        404: "That page does not exist.",
+        405: "That page cannot be opened this way.",
+    }
+    return error_response(messages.get(e.code, e.description), e.code)
+
+
+@app.errorhandler(Exception)
+def handle_unexpected_error(e):
+    app.logger.exception("Unexpected error")  # full details go to the terminal only
+    return error_response("Something went wrong on the server. Try again in a moment.", 500)
+
+
 if __name__ == "__main__":
     app.run(debug=True)
