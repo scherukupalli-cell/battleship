@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <h1>Two fleets, one hundred squares, and no peeking.</h1>
+  <p class="lede">Start a game, send your opponent the four-letter code, and take turns firing until one fleet is on the sea floor.</p>
+</section>
+
+{% if error %}<p class="alert" role="alert">{{ error }}</p>{% endif %}
+
+<div class="entry">
+  <form class="panel" method="post" action="{{ url_for('new_game') }}">
+    <h2>Start a game</h2>
+    <label for="new-name">Your name</label>
+    <input id="new-name" name="name" maxlength="20" placeholder="Player 1" autocomplete="off">
+    <button type="submit">Start game</button>
+  </form>
+
+  <form class="panel" method="post" action="{{ url_for('join_game') }}">
+    <h2>Join a game</h2>
+    <label for="join-name">Your name</label>
+    <input id="join-name" name="name" maxlength="20" placeholder="Player 2" value="{{ name or '' }}" autocomplete="off">
+    <label for="code">Game code</label>
+    <input id="code" name="code" maxlength="4" placeholder="ABCD" value="{{ code or '' }}" class="code-input" autocomplete="off" required>
+    <button type="submit">Join game</button>
+  </form>
+</div>
+{% endblock %}

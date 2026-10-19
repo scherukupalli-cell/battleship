@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Problem | Battleship{% endblock %}
+{% block content %}
+<article class="prose">
+  <h1>Lost at sea</h1>
+  <p class="alert">{{ message }}</p>
+  <p><a href="{{ url_for('index') }}">Go to the start page</a></p>
+</article>
+{% endblock %}

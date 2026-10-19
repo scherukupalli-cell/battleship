@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}How to play | Battleship{% endblock %}
+{% block content %}
+<article class="prose">
+  <h1>How to play</h1>
+  <p>Each player hides five ships on a 10 by 10 grid: a Carrier of five squares, a Battleship of four, a Cruiser and a Submarine of three each, and a Destroyer of two. Ships run across or down and cannot overlap.</p>
+  <p>Once both fleets are placed, players take turns firing at a square on the enemy grid. The server answers with a hit or a miss, and announces when every square of a ship has been hit and it sinks.</p>
+  <p>The first player to sink the whole enemy fleet wins. You only ever see your own ships. The server keeps your opponent's board secret until the game ends.</p>
+  <p><a href="{{ url_for('index') }}">Back to the start page</a></p>
+</article>
+{% endblock %}

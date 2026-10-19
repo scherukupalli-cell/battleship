@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Game {{ code }} | Battleship{% endblock %}
+{% block body_attrs %}data-code="{{ code }}" data-token="{{ token }}"{% endblock %}
+{% block content %}
+<section class="status">
+  <p id="status" class="status-line">Connecting to the server…</p>
+  <p id="event" class="event"></p>
+  <p id="connection" class="alert" hidden></p>
+  <p id="flash" class="alert" hidden></p>
+</section>
+
+<section id="share" class="share" hidden>
+  <p>Your opponent goes to the start page and joins with this code:</p>
+  <p class="code-display">{{ code }}</p>
+  <p class="hint">Keep this page's address to yourself. It is your seat at the table.</p>
+</section>
+
+<section id="placement" class="placement" hidden>
+  <p id="placing-label"></p>
+  <div class="buttons">
+    <button type="button" id="rotate" class="secondary">Rotate</button>
+    <button type="button" id="randomize" class="secondary">Place randomly</button>
+    <button type="button" id="reset" class="secondary">Clear board</button>
+    <button type="button" id="ready" disabled>I'm ready</button>
+  </div>
+</section>
+
+<div class="boards">
+  <figure class="board-wrap">
+    <figcaption>Your waters</figcaption>
+    <div id="my-board" class="board"></div>
+    <ul id="my-fleet" class="fleet"></ul>
+  </figure>
+  <figure class="board-wrap">
+    <figcaption id="target-caption">Enemy waters</figcaption>
+    <div id="target-board" class="board target"></div>
+    <ul id="enemy-fleet" class="fleet"></ul>
+  </figure>
+</div>
+
+<p id="again" class="again" hidden><a href="{{ url_for('index') }}">Play again</a></p>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='game.js') }}"></script>{% endblock %}
