@@ -8,12 +8,12 @@ A two-player Battleship game built with Flask. One player starts a game and gets
 python -m venv .venv
 source .venv/bin/activate        # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-flask --app app run --debug
+flask --app app run --debug --port 5001
 ```
 
-Open http://127.0.0.1:5000 and click **Start game**. To play against yourself, open a second window, go to the same address, and join with the code. Each player's seat is the secret part of their game URL, so two tabs in the same browser work fine.
+Open http://127.0.0.1:5001 and click **Start game**. To play against yourself, open a second window, go to the same address, and join with the code. Each player's seat is the secret part of their game URL, so two tabs in the same browser work fine.
 
-To play from phones on the same Wi-Fi, run `flask --app app run --host=0.0.0.0` and open `http://<your laptop's IP>:5000` on the phones.
+To play from phones on the same Wi-Fi, run `flask --app app run --host=0.0.0.0 --port 5001` and open `http://<your laptop's IP>:5001` on the phones.
 
 ## How it works
 
