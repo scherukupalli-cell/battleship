@@ -22,3 +22,16 @@ To play from phones on the same Wi-Fi, run `flask --app app run --host=0.0.0.0 -
 - **Browser, `static/game.js`:** asks the server for the latest state every second, draws both boards, and sends ship placements and shots back with `fetch`.
 
 Errors such as a wrong game code, a full game, an invalid shot or a lost connection show a plain message instead of a traceback. Games live in memory, so restarting the server clears them.
+
+## Tests
+
+```bash
+pip install -r requirements-dev.txt
+python -m pytest -v
+```
+
+## Deployment
+
+The app runs on Google Cloud Run. `.github/workflows/ci-cd.yml` runs the tests on every pull request into `main`. When a change is merged into `main`, it runs the tests again and, only if they pass, builds the Docker image, pushes it to Artifact Registry and deploys it to Cloud Run. The Google Cloud service account key is stored as the GitHub secret `GCP_SA_KEY` and never appears in the repository.
+
+Cloud Run is capped at one instance because games are kept in memory, so both players need to reach the same server.
